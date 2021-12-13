@@ -20,11 +20,11 @@
         });
 
         function getOrderTotalPrice(){
-            var orderTotalPrice = 0;
+            let orderTotalPrice = 0;
             $("input[name=cartChkBox]:checked").each(function() {
-                var cartItemId = $(this).val();
-                var price = $("#price_" + cartItemId).attr("data-price");
-                var count = $("#count_" + cartItemId).val();
+                let cartItemId = $(this).val();
+                let price = $("#price_" + cartItemId).attr("data-price");
+                let count = $("#count_" + cartItemId).val();
                 orderTotalPrice += price*count;
             });
 
@@ -32,10 +32,10 @@
         }
 
         function changeCount(obj){
-            var count = obj.value;
-            var cartItemId = obj.id.split('_')[1];
-            var price = $("#price_" + cartItemId).data("price");
-            var totalPrice = count*price;
+            let count = obj.value;
+            let cartItemId = obj.id.split('_')[1];
+            let price = $("#price_" + cartItemId).data("price");
+            let totalPrice = count*price;
             $("#totalPrice_" + cartItemId).html(totalPrice+"원");
             getOrderTotalPrice();
             updateCartItemCount(cartItemId, count);
@@ -51,10 +51,10 @@
         }
 
         function updateCartItemCount(cartItemId, count){
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cartItem/" + cartItemId+"?count=" + count;
+            let url = "/cartItem/" + cartItemId+"?count=" + count;
 
             $.ajax({
                 url      : url,
@@ -82,11 +82,11 @@
         }
 
         function deleteCartItem(obj){
-            var cartItemId = obj.dataset.id;
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
+            let cartItemId = obj.dataset.id;
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cartItem/" + cartItemId;
+            let url = "/cartItem/" + cartItemId;
 
             $.ajax({
                 url      : url,
@@ -114,24 +114,24 @@
         }
 
         function orders(){
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cart/orders";
+            let url = "/cart/orders";
 
-            var dataList = new Array();
-            var paramData = new Object();
+            let dataList = new Array();
+            let paramData = new Object();
 
             $("input[name=cartChkBox]:checked").each(function() {
-                var cartItemId = $(this).val();
-                var data = new Object();
+                let cartItemId = $(this).val();
+                let data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
             });
 
             paramData['cartOrderDtoList'] = dataList;
 
-            var param = JSON.stringify(paramData);
+            let param = JSON.stringify(paramData);
 
             $.ajax({
                 url      : url,

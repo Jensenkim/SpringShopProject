@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     private ItemRepositoryCustomImpl(EntityManager em){
         this.queryFactory = new JPAQueryFactory(em);
@@ -77,7 +77,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .fetchResults();
 
         List<Item> content = results.getResults();
-        Long total = results.getTotal();
+        long total = results.getTotal();
         return new PageImpl<>(content, pageable, total);
     }
 

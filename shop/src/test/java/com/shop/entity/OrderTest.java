@@ -35,6 +35,12 @@ class OrderTest {
     @PersistenceContext
     EntityManager em;
 
+    @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
     public Item createItem(){
         Item item = new Item();
         item.setItemNm("테스트 상품");
@@ -72,9 +78,6 @@ class OrderTest {
         assertEquals(3, saveOrder.getOrderItems().size());
     }
 
-    @Autowired
-    MemberRepository memberRepository;
-
     public Order createOrder(){
         Order order = new Order();
 
@@ -91,7 +94,6 @@ class OrderTest {
 
         Member member = new Member();
         memberRepository.save(member);
-
         order.setMember(member);
         orderRepository.save(order);
         return order;
@@ -104,9 +106,6 @@ class OrderTest {
         order.getOrderItems().remove(0);
         em.flush();
     }
-
-    @Autowired
-    OrderItemRepository orderItemRepository;
 
     @Test
     @DisplayName("지연 로딩 테스트")

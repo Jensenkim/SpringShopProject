@@ -33,9 +33,9 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    private LocalDateTime regTime;
+//    private LocalDateTime regTime;
 
-    private LocalDateTime updateTime;
+//    private LocalDateTime updateTime;
 
     public void addOrderItem(OrderItem orderItem){
         orderItems.add(orderItem);
